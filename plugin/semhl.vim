@@ -1,13 +1,20 @@
 " A special thanks goes out to John Leimon <jleimon@gmail.com>
-" for his more complete C/C++ version:
-"
-" Which served as a great basis for understanding
+" for his more complete C/C++ version,
+" which served as a great basis for understanding
 " regex matching in Vim
 
+
+let g:semanticColors = { 0x00: '72d572', 0x01: 'c5e1a5', 0x02: 'e6ee9c', 0x03: 'fff59d', 0x04: 'ffe082', 0x05: 'ffcc80', 0x06: 'ffab91', 0x07: 'bcaaa4', 0x08: 'b0bec5', 0x09: 'ffa726', 0x0a: 'ff8a65', 0x0b: 'f9bdbb', 0x0c: 'f9bdbb', 0x0d: 'f8bbd0', 0x0e: 'e1bee7', 0x0f: 'd1c4e9', 0x10: 'ffe0b2', 0x11: 'c5cae9', 0x12: 'd0d9ff', 0x13: 'b3e5fc', 0x14: 'b2ebf2', 0x15: 'b2dfdb', 0x16: 'a3e9a4', 0x17: 'dcedc8' , 0x18: 'f0f4c3', 0x19: 'ffb74d' }
+let s:hasBuiltColors = 0
+
 command! SemanticHighlight call s:semHighlight()
-command! BuildSemanticHighlight call s:buildColors()
+command! RebuildSemanticColors call s:buildColors()
 
 function! s:semHighlight()
+	if s:hasBuiltColors == 0
+		call s:buildColors()
+	endif
+
 	let i = 0
 	let buflen = line('$')
 	let pattern = '\<[a-zA-Z\_][a-zA-Z0-9\_]*\>'
@@ -33,11 +40,10 @@ function! s:semHighlight()
 	endwhile
 endfunction
 
-let g:semanticColors = { 0x00: '72d572', 0x01: 'c5e1a5', 0x02: 'e6ee9c', 0x03: 'fff59d', 0x04: 'ffe082', 0x05: 'ffcc80', 0x06: 'ffab91', 0x07: 'bcaaa4', 0x08: 'b0bec5', 0x09: 'ffa726', 0x0a: 'ff8a65', 0x0b: 'f9bdbb', 0x0c: 'f9bdbb', 0x0d: 'f8bbd0', 0x0e: 'e1bee7', 0x0f: 'd1c4e9', 0x10: 'ffe0b2', 0x11: 'c5cae9', 0x12: 'd0d9ff', 0x13: 'b3e5fc', 0x14: 'b2ebf2', 0x15: 'b2dfdb', 0x16: 'a3e9a4', 0x17: 'dcedc8' , 0x18: 'f0f4c3' }
-
 function! s:buildColors()
 	for key in keys(g:semanticColors)
 		execute 'hi def _semantic'.key.' guifg=#'.g:semanticColors[key]
 	endfor
+	let s:hasBuiltColors = 1
 endfunction
 
