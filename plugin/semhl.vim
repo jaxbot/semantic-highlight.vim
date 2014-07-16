@@ -8,6 +8,7 @@ let g:semanticColors = { 0x00: '72d572', 0x01: 'c5e1a5', 0x02: 'e6ee9c', 0x03: '
 let s:hasBuiltColors = 0
 
 command! SemanticHighlight call s:semHighlight()
+command! SemanticHighlightRevert call s:disableHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
 function! s:semHighlight()
@@ -45,5 +46,11 @@ function! s:buildColors()
 		execute 'hi def _semantic'.key.' guifg=#'.g:semanticColors[key] . ' ctermfg=' . key
 	endfor
 	let s:hasBuiltColors = 1
+endfunction
+
+function! s:disableHighlight()
+	for key in keys(g:semanticColors)
+		execute 'syn clear _semantic'.key
+	endfor
 endfunction
 
