@@ -17,7 +17,7 @@ function! s:semHighlight()
 
 	let i = 0
 	let buflen = line('$')
-	let pattern = '\<[a-zA-Z\_][a-zA-Z0-9\_]*\>'
+	let pattern = '\<[a-zA-Z\_\$][a-zA-Z0-9\_]*\>'
 	let cur_color = 0
 	let colorLen = len(g:semanticColors)
 
@@ -29,7 +29,7 @@ function! s:semHighlight()
 			let match_index = match(curline, pattern, index)
 
 			if (!empty(match))
-				execute 'syn keyword _semantic' . cur_color . ' ' . match
+				execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector " . match 
 				let cur_color = (cur_color + 1) % colorLen
 				let index += len(match) + 1
 			else
