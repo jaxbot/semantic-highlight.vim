@@ -20,6 +20,8 @@ Pathogen:
 git clone https://github.com/jaxbot/semantic-highlight.vim.git
 ```
 
+**Note**: Terminal Vim is currently unsupported. MacVim or gVim is required for the time being.
+
 ## Usage
 
 In a file, run `:SemanticHighlight` to convert variables into colors. Run `:e` to revert.
