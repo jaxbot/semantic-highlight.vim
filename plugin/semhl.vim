@@ -10,6 +10,7 @@ let s:blacklist = ['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunc
 
 command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
+command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
 function! s:semHighlight()
@@ -56,5 +57,15 @@ function! s:disableHighlight()
 	for key in keys(g:semanticColors)
 		execute 'syn clear _semantic'.key
 	endfor
+endfunction
+
+function! s:toggleHighlight()
+	if (exists("b:semanticOn") && b:semanticOn == 1)
+		call s:disableHighlight()
+		let b:semanticOn = 0
+	else
+		call s:semHighlight()
+		let b:semanticOn = 1
+	endif
 endfunction
 
