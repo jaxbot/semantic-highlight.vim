@@ -22,7 +22,13 @@ git clone https://github.com/jaxbot/semantic-highlight.vim.git
 
 ## Usage
 
-In a file, run `:SemanticHighlight` to convert variables into colors. Run `:e` to revert.
+In a file, run `:SemanticHighlight` to convert variables into colors. Run `:SemanticHighlightRevert` to revert.
+
+You can also map `:SemanticHighlightToggle` to a shortcut to toggle the effect on and off:
+
+```
+:nnoremap <Leader>s :SemanticHighlightToggle<cr>
+```
 
 ## Customization
 
