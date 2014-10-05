@@ -18,6 +18,8 @@ let g:semanticUseBackground = 0
 let s:hasBuiltColors = 0
 let s:blacklist = ['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunction', 'break', 'goto', 'else', 'call']
 
+let g:blacklist = exists('g:blacklist') ? g:blacklist : s:blacklist
+
 command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
