@@ -18,6 +18,9 @@ let g:semanticUseBackground = 0
 let s:hasBuiltColors = 0
 let s:blacklist = ['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunction', 'break', 'goto', 'else', 'call']
 
+let g:blacklist = exists('g:blacklist')?  g:blacklist : s:blacklist
+let g:blacklist = exists('g:blacklistAdditions') g:blacklistAdditions + s:blacklist : g:blacklist
+
 command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
@@ -42,7 +45,7 @@ function! s:semHighlight()
 			let match_index = match(curline, pattern, index)
 
 			if (!empty(match))
-				if (index(s:blacklist, match) == -1)
+				if (index(g:blacklist, match) == -1)
 					execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 					let cur_color = (cur_color + 1) % colorLen
 				endif
