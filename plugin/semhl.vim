@@ -20,12 +20,14 @@ let s:blacklist = ['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunc
 
 let g:blacklist = exists('g:blacklist')?  g:blacklist : s:blacklist
 
+let g:useCaching = exists('g:useCaching')? g:useCaching : 1
+
 command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
-let semCache = {}
+let semCache = {'+',1}}
 
 function! s:semHighlight()
 	if s:hasBuiltColors == 0
@@ -48,7 +50,7 @@ function! s:semHighlight()
 			if (!empty(match))
 				if (index(g:blacklist, match) == -1)
 					if(has_key(semCache,match))
-						execute 'execute syn keyword _semantic' . semCache[match]. " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
+						execute 'syn keyword _semantic' . semCache[match]. " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 					else
 						execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 						let semCache[match] = cur_color
