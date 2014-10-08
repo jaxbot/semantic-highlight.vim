@@ -67,6 +67,14 @@ but can be overidden in your .vimc with
 let g:blacklist = ['some','keywords','you','would','like','this','plugin','to','ignore']
 ```
 
+###Caching
+The plugin will store previously seen values in a dictionary in order to keep colors consistent when editing.
+This behavior can be disabled with 
+
+```
+let g:useCaching = 0
+```
+
 ## Kudos
 
 Big thanks to John Leimon, whose [Semantic C/C++ Vimscript](http://www.vim.org/scripts/script.php?script_id=4945) was inspirational in the construction of this one.
