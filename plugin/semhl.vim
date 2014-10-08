@@ -25,7 +25,7 @@ command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
-let cache = {}
+let semCache = {}
 
 function! s:semHighlight()
 	if s:hasBuiltColors == 0
@@ -47,11 +47,11 @@ function! s:semHighlight()
 
 			if (!empty(match))
 				if (index(g:blacklist, match) == -1)
-					if(has_key(cache,match)==1)
-						execute 'execute 'syn keyword _semantic' . cache[match]. " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
+					if(has_key(semCache,match))
+						execute 'execute syn keyword _semantic' . semCache[match]. " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 					else
 						execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
-						cache[match] = cur_color
+						let semCache[match] = cur_color
 					endif
 					let cur_color = (cur_color + 1) % colorLen
 				endif
