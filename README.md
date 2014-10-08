@@ -30,8 +30,15 @@ You can also map `:SemanticHighlightToggle` to a shortcut to toggle the effect o
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
 ```
 
-## Customization
+To have the sematic highlight trigger whenever you enter insert mode and change text add 
 
+```
+autocmd BufEnder * :SemanticHighlight
+```
+
+Note: On slower machines this could be potentially bottlenecking
+## Customization
+###Colors
 Set `g:semanticTermColors` and/or `g:semanticGUIColors` to a list of colors, then run `RebuildSemanticColors` to flush the cache. The color lists look like:
 
 ```
@@ -44,6 +51,29 @@ let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,1
 ```
 
 Either list can also be set in your vimrc
+
+###Blacklist
+Certain words can be reserved (such as keywords in the languages you use)
+
+The built in blacklist is 
+
+```
+['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunction', 'break', 'goto', 'else', 'call']
+``` 
+
+but can be overidden in your .vimc with 
+
+```
+let g:blacklist = ['some','keywords','you','would','like','this','plugin','to','ignore']
+```
+
+###Caching
+The plugin will store previously seen values in a dictionary in order to keep colors consistent when editing.
+This behavior can be disabled with 
+
+```
+let g:useCaching = 0
+```
 
 ## Kudos
 
