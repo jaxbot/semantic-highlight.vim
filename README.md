@@ -31,7 +31,7 @@ You can also map `:SemanticHighlightToggle` to a shortcut to toggle the effect o
 ```
 
 ## Customization
-
+###Colors
 Set `g:semanticTermColors` and/or `g:semanticGUIColors` to a list of colors, then run `RebuildSemanticColors` to flush the cache. The color lists look like:
 
 ```
