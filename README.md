@@ -30,7 +30,7 @@ You can also map `:SemanticHighlightToggle` to a shortcut to toggle the effect o
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
 ```
 
-To have the sematic highlihgint trigger whenever you enter insert mode and change text add 
+To have the sematic highlight trigger whenever you enter insert mode and change text add 
 
 ```
 autocmd BufEnder * :SemanticHighlight
