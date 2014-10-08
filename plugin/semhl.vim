@@ -27,7 +27,7 @@ command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
-let semCache = {'+',1}}
+let semCache = {'+':1}
 
 function! s:semHighlight()
 	if s:hasBuiltColors == 0
