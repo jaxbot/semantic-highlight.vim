@@ -45,6 +45,21 @@ let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,1
 
 Either list can also be set in your vimrc
 
+###Blacklist
+Certain words can be reserved (such as keywords in the languages you use)
+
+The built in blacklist is 
+
+```
+['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunction', 'break', 'goto', 'else', 'call']
+``` 
+
+but can be overidden in your .vimc with 
+
+```
+let g:blacklist = ['some','keywords','you','would','like','this','plugin','to','ignore']
+```
+
 ## Kudos
 
 Big thanks to John Leimon, whose [Semantic C/C++ Vimscript](http://www.vim.org/scripts/script.php?script_id=4945) was inspirational in the construction of this one.
