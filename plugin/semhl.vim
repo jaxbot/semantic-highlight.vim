@@ -12,12 +12,18 @@ let s:semanticTermColors = range(20)
 let g:semanticGUIColors = exists('g:semanticGUIColors') ? g:semanticGUIColors : s:semanticGUIColors
 let g:semanticTermColors = exists('g:semanticTermColors') ? g:semanticTermColors : s:semanticTermColors
 
+" Allow the user to override blacklists
+let g:enableBlacklist = exists('g:enableBlacklist') ? g:enableBlacklist : 1
+let b:blacklist = {}
+let b:current_filetype = ''
+
+if g:enableBlacklist
+	let b:blacklist = SemanticHighlightBlacklist()
+	autocmd FileType * let b:current_filetype = &filetype
+endif
 
 let g:semanticUseBackground = 0
 let s:hasBuiltColors = 0
-let s:blacklist = ['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunction', 'break', 'goto', 'else', 'call']
-
-let g:blacklist = exists('g:blacklist')?  g:blacklist : s:blacklist
 
 command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
