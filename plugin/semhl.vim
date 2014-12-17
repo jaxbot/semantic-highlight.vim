@@ -50,7 +50,8 @@ function! s:semHighlight()
 				break
 			endif
 
-			if (index(g:blacklist, match) == -1)
+			let s:no_blacklist_exists_for_filetype = empty(b:blacklist) || !has_key(b:blacklist, b:current_filetype)
+			if (s:no_blacklist_exists_for_filetype || index(b:blacklist[b:current_filetype], match) == -1)
 				execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 				let cur_color = (cur_color + 1) % colorLen
 			endif
