@@ -30,7 +30,6 @@ function! s:semHighlight()
 		call s:buildColors()
 	endif
 
-	let i = 0
 	let buflen = line('$')
 	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
 	let cur_color = 0
@@ -41,7 +40,6 @@ function! s:semHighlight()
 		let index = 0
 		while 1
 			let match = matchstr(curline, pattern, index)
-			let match_index = match(curline, pattern, index)
 
 			if (!empty(match))
 				if (index(g:blacklist, match) == -1)
