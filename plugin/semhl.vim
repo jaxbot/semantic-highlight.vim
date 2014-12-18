@@ -27,10 +27,10 @@ let g:semanticTermColors = exists('g:semanticTermColors') ? g:semanticTermColors
 let g:semanticUseCache = exists('g:semanticUseCache') ? g:semanticUseCache : 1
 
 " Allow the user to override blacklists
-let g:enableBlacklist = exists('g:enableBlacklist') ? g:enableBlacklist : 1
+let g:semanticEnableBlacklist = exists('g:semanticEnableBlacklist') ? g:semanticEnableBlacklist : 1
 
 let s:blacklist = {}
-if g:enableBlacklist
+if g:semanticEnableBlacklist
 	let s:blacklist = blacklist#GetBlacklist()
 endif
 

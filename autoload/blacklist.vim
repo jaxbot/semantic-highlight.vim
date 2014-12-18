@@ -166,8 +166,8 @@ let s:blacklist = {
 			\ ],
 			\ }
 
-if (exists('g:blacklistOverrides'))
-	let s:blacklist = extend(s:blacklist, g:blacklistOverrides)
+if (exists('g:semanticBlacklistOverride'))
+	let s:blacklist = extend(s:blacklist, g:semanticBlacklistOverride)
 endif
 
 function! blacklist#GetBlacklist()
