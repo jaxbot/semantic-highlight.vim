@@ -3,6 +3,17 @@
 " which served as a great basis for understanding
 " regex matching in Vim
 
+" Allow users to configure the plugin to auto start for certain filetypes
+if (exists('g:semanticEnableFileTypes'))
+	function s:enableInFileType()
+		if (index(g:semanticEnableFileTypes, &filetype) != -1)
+			call s:semHighlight()
+		endif
+	endfunction
+
+	autocmd BufReadPost,FileReadPost * call s:enableInFileType()
+endif
+
 " Set defaults for colors
 let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
 let s:semanticTermColors = range(20)
@@ -19,10 +30,8 @@ let g:semanticUseCache = exists('g:semanticUseCache') ? g:semanticUseCache : 1
 let g:enableBlacklist = exists('g:enableBlacklist') ? g:enableBlacklist : 1
 
 let s:blacklist = {}
-let s:current_filetype = ''
 if g:enableBlacklist
 	let s:blacklist = blacklist#GetBlacklist()
-	autocmd FileType * let s:current_filetype = &filetype
 endif
 
 let g:semanticUseBackground = 0
@@ -68,8 +77,8 @@ function! s:semHighlight()
 				break
 			endif
 
-			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, s:current_filetype)
-			if (l:no_blacklist_exists_for_filetype || index(s:blacklist[s:current_filetype], match) == -1)
+			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, &filetype)
+			if (l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1)
 				execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 				let cur_color = (cur_color + 1) % colorLen
 			endif
