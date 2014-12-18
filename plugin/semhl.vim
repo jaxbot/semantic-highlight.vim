@@ -17,12 +17,12 @@ let g:semanticUseCache = exists('g:semanticUseCache') ? g:semanticUseCache : 1
 
 " Allow the user to override blacklists
 let g:enableBlacklist = exists('g:enableBlacklist') ? g:enableBlacklist : 1
-let b:blacklist = {}
-let b:current_filetype = ''
 
+let s:blacklist = {}
+let s:current_filetype = ''
 if g:enableBlacklist
-	let b:blacklist = blacklist#GetBlacklist()
-	autocmd FileType * let b:current_filetype = &filetype
+	let s:blacklist = blacklist#GetBlacklist()
+	autocmd FileType * let s:current_filetype = &filetype
 endif
 
 let g:semanticUseBackground = 0
@@ -68,9 +68,9 @@ function! s:semHighlight()
 				break
 			endif
 
-			let s:no_blacklist_exists_for_filetype = empty(b:blacklist) || !has_key(b:blacklist, b:current_filetype)
-			if (s:no_blacklist_exists_for_filetype || index(b:blacklist[b:current_filetype], match) == -1)
-				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
+			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, s:current_filetype)
+			if (l:no_blacklist_exists_for_filetype || index(s:blacklist[b:current_filetype], match) == -1)
+				execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 				let cur_color = (cur_color + 1) % colorLen
 			endif
 
