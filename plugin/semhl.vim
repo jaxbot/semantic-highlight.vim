@@ -21,7 +21,7 @@ let b:blacklist = {}
 let b:current_filetype = ''
 
 if g:enableBlacklist
-	let b:blacklist = SemanticHighlightBlacklist()
+	let b:blacklist = blacklist#GetBlacklist()
 	autocmd FileType * let b:current_filetype = &filetype
 endif
 
