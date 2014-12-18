@@ -170,7 +170,7 @@ if (exists('g:blacklistOverrides'))
 	let s:blacklist = extend(s:blacklist, g:blacklistOverrides)
 endif
 
-function! SemanticHighlightBlacklist()
+function! blacklist#GetBlacklist()
 	return s:blacklist
 endfunction
 
