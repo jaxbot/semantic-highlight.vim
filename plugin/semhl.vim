@@ -30,7 +30,6 @@ function! s:semHighlight()
 		call s:buildColors()
 	endif
 
-	let i = 0
 	let buflen = line('$')
 	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
 	let cur_color = 0
@@ -41,18 +40,17 @@ function! s:semHighlight()
 		let index = 0
 		while 1
 			let match = matchstr(curline, pattern, index)
-			let match_index = match(curline, pattern, index)
 
-			if (!empty(match))
-				if (index(g:blacklist, match) == -1)
-					execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
-					let cur_color = (cur_color + 1) % colorLen
-				endif
-
-				let index += len(match) + 1
-			else
+			if (empty(match))
 				break
 			endif
+
+			if (index(g:blacklist, match) == -1)
+				execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
+				let cur_color = (cur_color + 1) % colorLen
+			endif
+
+			let index += len(match) + 1
 		endwhile
 		let buflen -= 1
 	endwhile
