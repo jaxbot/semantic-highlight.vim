@@ -12,6 +12,9 @@ let s:semanticTermColors = range(20)
 let g:semanticGUIColors = exists('g:semanticGUIColors') ? g:semanticGUIColors : s:semanticGUIColors
 let g:semanticTermColors = exists('g:semanticTermColors') ? g:semanticTermColors : s:semanticTermColors
 
+" Allow the user to turn cache off
+let g:semanticUseCache = exists('g:semanticUseCache') ? g:semanticUseCache : 1
+
 " Allow the user to override blacklists
 let g:enableBlacklist = exists('g:enableBlacklist') ? g:enableBlacklist : 1
 
@@ -29,6 +32,21 @@ command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
+
+let b:cache = {}
+
+function! s:getCachedColor(current_color, match)
+	if !g:semanticUseCache
+		return a:current_color
+	endif
+
+	if (has_key(b:cache, a:match))
+		return b:cache[a:match]
+	endif
+
+	let b:cache[a:match] = a:current_color
+	return a:current_color
+endfunction
 
 function! s:semHighlight()
 	if s:hasBuiltColors == 0
