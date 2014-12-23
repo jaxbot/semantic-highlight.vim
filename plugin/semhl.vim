@@ -5,13 +5,7 @@
 
 " Allow users to configure the plugin to auto start for certain filetypes
 if (exists('g:semanticEnableFileTypes'))
-	function s:enableInFileType()
-		if (index(g:semanticEnableFileTypes, &filetype) != -1)
-			call s:semHighlight()
-		endif
-	endfunction
-
-	autocmd BufReadPost,FileReadPost * call s:enableInFileType()
+	execute 'autocmd FileType ' . join(g:semanticEnableFileTypes, ',') . ' call s:enableHighlight()'
 endif
 
 " Set defaults for colors
@@ -114,18 +108,22 @@ function! s:buildColors()
 endfunction
 
 function! s:disableHighlight()
+	let b:semanticOn = 0
 	for key in range(len(s:semanticColors))
 		execute 'syn clear _semantic'.key
 	endfor
 endfunction
 
+function! s:enableHighlight()
+	call s:semHighlight()
+	let b:semanticOn = 1
+endfunction
+
 function! s:toggleHighlight()
-	if (exists("b:semanticOn") && b:semanticOn == 1)
+	if (exists('b:semanticOn') && b:semanticOn == 1)
 		call s:disableHighlight()
-		let b:semanticOn = 0
 	else
 		call s:semHighlight()
-		let b:semanticOn = 1
 	endif
 endfunction
 
