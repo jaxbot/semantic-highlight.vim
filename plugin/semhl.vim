@@ -124,6 +124,7 @@ function! s:toggleHighlight()
 		call s:disableHighlight()
 	else
 		call s:semHighlight()
+		let b:semanticOn = 1
 	endif
 endfunction
 
