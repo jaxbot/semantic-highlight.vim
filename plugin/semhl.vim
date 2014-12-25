@@ -36,18 +36,18 @@ command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
-let b:cache = {}
+let s:cache = {}
 
 function! s:getCachedColor(current_color, match)
 	if !g:semanticUseCache
 		return a:current_color
 	endif
 
-	if (has_key(b:cache, a:match))
-		return b:cache[a:match]
+	if (has_key(s:cache, a:match))
+		return s:cache[a:match]
 	endif
 
-	let b:cache[a:match] = a:current_color
+	let s:cache[a:match] = a:current_color
 	return a:current_color
 endfunction
 
