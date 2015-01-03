@@ -45,9 +45,37 @@ let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,1
 
 Either list can also be set in your vimrc
 
+## Language support
+
+This plugin is language agnostic, meaning it will work on any language with words. However, some languages have been tweaked by default to disable highlighting of language keywords.
+
+Current language support with keyword blacklists:
+
+* JavaScript
+* Ruby
+* PHP
+* Python
+* CoffeeScript
+
+This can be customized locally by populating `g:semanticBlacklistOverride` like so:
+
+```
+let g:semanticBlacklistOverride = {
+	\ 'javascript': [
+	\	'setTimeout',
+	\	'break',
+	\	'dance',
+	\ ]
+\ }
+```
+
+If you want to add language support to the plugin itself, feel free to edit autoload/blacklist.vim and submit a pull request with your changes. Help is appreciated!
+
 ## Kudos
 
 Big thanks to John Leimon, whose [Semantic C/C++ Vimscript](http://www.vim.org/scripts/script.php?script_id=4945) was inspirational in the construction of this one.
+
+Also big thanks to everyone who submitted bugs, suggestions, and pull requests!
 
 ## About me
 
