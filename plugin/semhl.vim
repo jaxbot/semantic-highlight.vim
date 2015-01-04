@@ -73,7 +73,7 @@ function! s:semHighlight()
 
 			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, &filetype)
 			if (l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1)
-				execute 'syn keyword _semantic' . cur_color . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
+				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 				let cur_color = (cur_color + 1) % colorLen
 			endif
 
