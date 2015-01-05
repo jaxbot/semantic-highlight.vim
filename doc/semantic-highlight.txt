@@ -51,5 +51,26 @@ provide an override object as below:
 
 let g:semanticBlacklistOverride = { 'javascript': ['this', 'that', 'the_other'] }
 
+g:semanticEnableFileTypes                                           *g:semanticEnableFileTypes*
+
+The plugin can be configured to activate automatically for certain filetypes.
+
+There are three possible behaviours, off, filetype only and filetype +
+cursorhold.
+
+filetype:
+
+This will automatically start the plugin when entering a file of the given
+filetypes.
+
+let g:semanticEnableFileTypes = ['javascript', 'vim']
+
+filetype + cursorhold:
+
+This will automatically start the plugin when entering a file of the given
+filetypes, and re-render on cursorhold for the same filetypes.
+
+let g:semanticEnableFileTypes = { 'javascript': 'js', 'vim': 'vim' }
+
 vim:tw=78:ts=8:ft=help:norl:
 
