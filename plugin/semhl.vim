@@ -5,7 +5,12 @@
 
 " Allow users to configure the plugin to auto start for certain filetypes
 if (exists('g:semanticEnableFileTypes'))
-	execute 'autocmd FileType ' . join(g:semanticEnableFileTypes, ',') . ' call s:enableHighlight()'
+	if type(g:semanticEnableFileTypes) == type([])
+		execute 'autocmd FileType ' . join(g:semanticEnableFileTypes, ',') . ' call s:enableHighlight()'
+	elseif type(g:semanticEnableFileTypes) == type({})
+		execute 'autocmd FileType ' . join(keys(g:semanticEnableFileTypes), ',') . ' call s:enableHighlight()'
+		execute 'autocmd CursorHold ' . join(map(values(g:semanticEnableFileTypes), '"*." . v:val'), ',') . ' call s:semHighlight()'
+	endif
 endif
 
 " Set defaults for colors
