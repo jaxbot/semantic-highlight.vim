@@ -1,29 +1,29 @@
 *semantic-highlight.txt*
-                                                                    *semantic-highlight*
+                                                *semantic-highlight*
 
 ==============================================================================
-CONTENTS                                                     *semantic-highlight-contents*
+CONTENTS                                        *semantic-highlight-contents*
 
-Variables                                                   |semantic-highlight-variables|
+Variables                                       |semantic-highlight-variables|
 
 ------------------------------------------------------------------------------
-VARIABLES                                                   *semantic-highlight-variables*
+VARIABLES                                       *semantic-highlight-variables*
 
-g:semanticGUIColors                                              *g:semanticGUIColors*
+g:semanticGUIColors                             *g:semanticGUIColors*
 
 Override this with an array of hex values to change the list of colors the
 plugin will use when in GUI mode.
 
 let g:semanticGUIColors = ['#FFF', '#000']
 
-g:semanticTermColors                                              *g:semanticTermColors*
+g:semanticTermColors                            *g:semanticTermColors*
 
-Override this with an array of numeric values to change the list of colors the plugin
-will use when in CLI mode.
+Override this with an array of numeric values to change the list of colors the
+plugin will use when in CLI mode.
 
 let g:semanticGUIColors = [1, 2]
 
-g:semanticUseCache                                              *g:semanticUseCache*
+g:semanticUseCache                              *g:semanticUseCache*
 
 By default the plugin will cache color values in order to provide a more
 consistent coloration across files.
@@ -32,7 +32,7 @@ To turn this off, set this to 0
 
 let g:semanticUseCache = 0
 
-g:semanticEnableBlacklist                                              *g:semanticEnableBlacklist*
+g:semanticEnableBlacklist                       *g:semanticEnableBlacklist*
 
 By default the plugin will use an internal blacklist to ensure language
 keywords are not colored.
@@ -41,7 +41,7 @@ To disable this behaviour, set this to 0
 
 let g:semanticEnableBlacklist = 0
 
-g:semanticBlacklistOverride                                              *g:semanticBlacklistOverride*
+g:semanticBlacklistOverride                     *g:semanticBlacklistOverride*
 
 The plugin uses an internal object to load keywords for various languages.
 Languages currently configured are PHP, JavaScript and Ruby.
@@ -51,7 +51,7 @@ provide an override object as below:
 
 let g:semanticBlacklistOverride = { 'javascript': ['this', 'that', 'the_other'] }
 
-g:semanticEnableFileTypes                                           *g:semanticEnableFileTypes*
+g:semanticEnableFileTypes                       *g:semanticEnableFileTypes*
 
 The plugin can be configured to activate automatically for certain filetypes.
 
