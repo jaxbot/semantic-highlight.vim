@@ -24,6 +24,8 @@ let g:semanticTermColors = exists('g:semanticTermColors') ? g:semanticTermColors
 
 " Allow the user to turn cache off
 let g:semanticUseCache = exists('g:semanticUseCache') ? g:semanticUseCache : 1
+let g:semanticPersistCache = exists('g:semanticPersistCache') ? g:semanticPersistCache : 1
+let g:semanticPersistCacheLocation = exists('g:semanticPersistCacheLocation') ? g:semanticPersistCacheLocation : $HOME . '/.semantic-highlight-cache'
 
 " Allow the user to override blacklists
 let g:semanticEnableBlacklist = exists('g:semanticEnableBlacklist') ? g:semanticEnableBlacklist : 1
@@ -42,6 +44,25 @@ command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
 let s:cache = {}
+if g:semanticPersistCache && filereadable(g:semanticPersistCacheLocation)
+	let s:cacheList = readfile(g:semanticPersistCacheLocation)
+	for s:cacheListItem in s:cacheList
+		let s:cacheListItemList = eval(s:cacheListItem)
+		let s:cache[s:cacheListItemList[0]] = s:cacheListItemList[1]
+	endfor
+	unlet s:cacheListItem s:cacheList
+endif
+
+autocmd VimLeave * call s:persistCache()
+
+function! s:persistCache()
+	let l:cacheList = []
+	for [match,color] in items(s:cache)
+		call add(l:cacheList, string([match, color]))
+		unlet match color
+	endfor
+	call writefile(l:cacheList, g:semanticPersistCacheLocation)
+endfunction
 
 function! s:getCachedColor(current_color, match)
 	if !g:semanticUseCache
