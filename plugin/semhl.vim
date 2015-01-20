@@ -43,21 +43,34 @@ command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
 
-let s:cache = {}
-if g:semanticPersistCache && filereadable(g:semanticPersistCacheLocation)
+function! s:readCache() abort
+	if !filereadable(g:semanticPersistCacheLocation)
+		return []
+	endif
+
+	let l:localCache = {}
 	let s:cacheList = readfile(g:semanticPersistCacheLocation)
 	for s:cacheListItem in s:cacheList
 		let s:cacheListItemList = eval(s:cacheListItem)
-		let s:cache[s:cacheListItemList[0]] = s:cacheListItemList[1]
+		let l:localCache[s:cacheListItemList[0]] = s:cacheListItemList[1]
 	endfor
+
 	unlet s:cacheListItem s:cacheList
+
+	return l:localCache
+endfunction
+
+let s:cache = {}
+if g:semanticPersistCache && filereadable(g:semanticPersistCacheLocation)
+	let s:cache = s:readCache()
 endif
 
 autocmd VimLeave * call s:persistCache()
 
 function! s:persistCache()
 	let l:cacheList = []
-	for [match,color] in items(s:cache)
+	let l:mergedCache = extend(s:readCache(), s:cache)
+	for [match,color] in items(l:mergedCache)
 		call add(l:cacheList, string([match, color]))
 		unlet match color
 	endfor
