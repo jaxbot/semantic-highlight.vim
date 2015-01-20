@@ -55,7 +55,9 @@ function! s:readCache() abort
 		let l:localCache[s:cacheListItemList[0]] = s:cacheListItemList[1]
 	endfor
 
-	unlet s:cacheListItem s:cacheList
+	if exists("s:cacheListItem")
+		unlet s:cacheListItem s:cacheList
+	endif
 
 	return l:localCache
 endfunction
