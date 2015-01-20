@@ -1,76 +1,121 @@
-*semantic-highlight.txt*
-                                                                    *semantic-highlight*
+*semantic-highlight.txt*  Semantic-Highlight.vim
 
-==============================================================================
-CONTENTS                                                     *semantic-highlight-contents*
+===============================================================================
+Contents ~
 
-Variables                                                   |semantic-highlight-variables|
+ 1. Introduction                              |semantic-highlight-introduction|
+ 2. Install                                        |semantic-highlight-install|
+ 3. Usage                                            |semantic-highlight-usage|
+ 4. Customization                            |semantic-highlight-customization|
+ 5. Language support                      |semantic-highlight-language-support|
+ 6. Kudos                                            |semantic-highlight-kudos|
+ 7. About me                                      |semantic-highlight-about-me|
+ 8. References                                  |semantic-highlight-references|
 
-------------------------------------------------------------------------------
-VARIABLES                                                   *semantic-highlight-variables*
+===============================================================================
+                                              *semantic-highlight-introduction*
+Introduction ~
 
-g:semanticGUIColors                                              *g:semanticGUIColors*
+Where every variable is a different color, an idea popularized by Evan Brooks'
+[1] blog post.
 
-Override this with an array of hex values to change the list of colors the
-plugin will use when in GUI mode.
+This is an early version of an experimental but developing plugin.
 
-let g:semanticGUIColors = ['#FFF', '#000']
+  Image: (see reference [2])
 
-g:semanticTermColors                                              *g:semanticTermColors*
+===============================================================================
+                                                   *semantic-highlight-install*
+Install ~
 
-Override this with an array of numeric values to change the list of colors the plugin
-will use when in CLI mode.
+Vundle or Neobundle:
+>
+  Plugin 'jaxbot/semantic-highlight.vim'
+<
+Pathogen:
+>
+  git clone https://github.com/jaxbot/semantic-highlight.vim.git
+<
+===============================================================================
+                                                     *semantic-highlight-usage*
+Usage ~
 
-let g:semanticGUIColors = [1, 2]
+In a file, run ':SemanticHighlight' to convert variables into colors. Run
+':SemanticHighlightRevert' to revert.
 
-g:semanticUseCache                                              *g:semanticUseCache*
+You can also map ':SemanticHighlightToggle' to a shortcut to toggle the effect
+on and off:
+>
+  :nnoremap <Leader>s :SemanticHighlightToggle<cr>
+<
+===============================================================================
+                                             *semantic-highlight-customization*
+Customization ~
 
-By default the plugin will cache color values in order to provide a more
-consistent coloration across files.
+Set 'g:semanticTermColors' and/or 'g:semanticGUIColors' to a list of colors,
+then run 'RebuildSemanticColors' to flush the cache. The color lists look like:
+>
+  let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
+<
+or
+>
+  let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+<
+Either list can also be set in your vimrc
 
-To turn this off, set this to 0
+===============================================================================
+                                          *semantic-highlight-language-support*
+Language support ~
 
-let g:semanticUseCache = 0
+This plugin is language agnostic, meaning it will work on any language with
+words. However, some languages have been tweaked by default to disable
+highlighting of language keywords.
 
-g:semanticEnableBlacklist                                              *g:semanticEnableBlacklist*
+Current language support with keyword blacklists:
 
-By default the plugin will use an internal blacklist to ensure language
-keywords are not colored.
+- JavaScript
+- Ruby
+- PHP
+- Python
+- CoffeeScript
 
-To disable this behaviour, set this to 0
+This can be customized locally by populating 'g:semanticBlacklistOverride' like
+so:
+>
+  let g:semanticBlacklistOverride = {
+      \ 'javascript': [
+      \   'setTimeout',
+      \   'break',
+      \   'dance',
+      \ ]
+  \ }
+<
+If you want to add language support to the plugin itself, feel free to edit
+autoload/blacklist.vim and submit a pull request with your changes. Help is
+appreciated!
 
-let g:semanticEnableBlacklist = 0
+===============================================================================
+                                                     *semantic-highlight-kudos*
+Kudos ~
 
-g:semanticBlacklistOverride                                              *g:semanticBlacklistOverride*
+Big thanks to John Leimon, whose Semantic C/C++ Vimscript [3] was inspirational
+in the construction of this one.
 
-The plugin uses an internal object to load keywords for various languages.
-Languages currently configured are PHP, JavaScript and Ruby.
+Also big thanks to everyone who submitted bugs, suggestions, and pull requests!
 
-To add a language or replace the keyword list for a configured language,
-provide an override object as below:
+===============================================================================
+                                                  *semantic-highlight-about-me*
+About me ~
 
-let g:semanticBlacklistOverride = { 'javascript': ['this', 'that', 'the_other'] }
+I'm Jonathan. I like to hack around with Vim, Node.js, embedded hardware, and
+Glass. If any of that sounds interesting, follow me! [4]
 
-g:semanticEnableFileTypes                                           *g:semanticEnableFileTypes*
+===============================================================================
+                                                *semantic-highlight-references*
+References ~
 
-The plugin can be configured to activate automatically for certain filetypes.
+[1] https://medium.com/@evnbr/coding-in-color-3a6db2743a1e
+[2] https://raw.githubusercontent.com/jaxbot/semantic-highlight.vim/master/semantic-highlight.png
+[3] http://www.vim.org/scripts/script.php?script_id=4945
+[4] https://github.com/jaxbot
 
-There are three possible behaviours, off, filetype only and filetype +
-cursorhold.
-
-filetype:
-
-This will automatically start the plugin when entering a file of the given
-filetypes.
-
-let g:semanticEnableFileTypes = ['javascript', 'vim']
-
-filetype + cursorhold:
-
-This will automatically start the plugin when entering a file of the given
-filetypes, and re-render on cursorhold for the same filetypes.
-
-let g:semanticEnableFileTypes = { 'javascript': 'js', 'vim': 'vim' }
-
-vim:tw=78:ts=8:ft=help:norl:
-
+vim: ft=help
