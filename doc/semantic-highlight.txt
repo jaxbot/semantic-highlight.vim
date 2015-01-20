@@ -72,5 +72,17 @@ filetypes, and re-render on cursorhold for the same filetypes.
 
 let g:semanticEnableFileTypes = { 'javascript': 'js', 'vim': 'vim' }
 
+g:semanticPersistCache                     *g:semanticPersistCache*
+
+Set this to 1 to allow persistent color values across vim sessions
+
+Default value is 0
+
+g:semanticPersistCacheLocation             *g:semanticPersistCacheLocation*
+
+The location of the persisted color values.
+
+Default is $HOME/.semantic-highlight-cache
+
 vim:tw=78:ts=8:ft=help:norl:
 
