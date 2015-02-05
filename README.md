@@ -2,8 +2,6 @@
 
 Where every variable is a different color, an idea popularized by <a href="https://medium.com/@evnbr/coding-in-color-3a6db2743a1e">Evan Brooks'</a> blog post.
 
-This is an early version of an experimental but developing plugin.
-
 <img src="https://raw.githubusercontent.com/jaxbot/semantic-highlight.vim/master/semantic-highlight.png">
 
 ## Install
