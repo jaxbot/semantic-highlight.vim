@@ -96,6 +96,7 @@ let s:blacklist = {
 	\	'number',
 	\	'string',
 	\	'Array',
+	\	'Object',
 	\	'any',
 	\	'module',
 	\ ],
