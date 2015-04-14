@@ -63,6 +63,7 @@ function! s:readCache() abort
 endfunction
 
 let s:cache = {}
+let s:cache_defined = {}
 if g:semanticPersistCache && filereadable(g:semanticPersistCacheLocation)
 	let s:cache = s:readCache()
 endif
@@ -113,7 +114,8 @@ function! s:semHighlight()
 			endif
 
 			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, &filetype)
-			if (l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1)
+			if ((l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1) && !has_key(s:cache_defined, match))
+        let s:cache_defined[match] = 1
 				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 				let cur_color = (cur_color + 1) % colorLen
 			endif
