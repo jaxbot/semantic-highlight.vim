@@ -98,6 +98,8 @@ function! s:semHighlight()
 		call s:buildColors()
 	endif
 
+	let b:cache_defined = {}
+
 	let buflen = line('$')
 	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
 	let cur_color = 0
@@ -115,7 +117,7 @@ function! s:semHighlight()
 
 			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, &filetype)
 			if ((l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1) && !has_key(b:cache_defined, match))
-        let b:cache_defined[match] = 1
+				let b:cache_defined[match] = 1
 				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . " containedin=phpBracketInString,phpVarSelector,phpClExpressions,phpIdentifier " . match
 				let cur_color = (cur_color + 1) % colorLen
 			endif
@@ -155,10 +157,12 @@ function! s:disableHighlight()
 	for key in range(len(s:semanticColors))
 		execute 'syn clear _semantic'.key
 	endfor
-  let b:cache_defined = {}
+
+	let b:cache_defined = {}
 endfunction
 
 function! s:enableHighlight()
+	let b:cache_defined = {}
 	call s:semHighlight()
 	let b:semanticOn = 1
 endfunction
