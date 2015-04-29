@@ -120,10 +120,10 @@ function! s:semHighlight()
 			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, &filetype)
 			if ((l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1) && !has_key(b:cache_defined, match))
 				let b:cache_defined[match] = 1
-        let l:containedin = ''
-        if (!empty(s:containedinlist) && has_key(s:containedinlist, &filetype))
-          let l:containedin = ' containedin=' . s:containedinlist[&filetype]
-        endif
+				let l:containedin = ''
+				if (!empty(s:containedinlist) && has_key(s:containedinlist, &filetype))
+					let l:containedin = ' containedin=' . s:containedinlist[&filetype]
+				endif
 
 				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' ' . match
 				let cur_color = (cur_color + 1) % colorLen
