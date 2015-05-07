@@ -1,6 +1,11 @@
 let s:blacklist = {
 	\ 'javascript': [
+	\	'render',
+	\	'constructor',
+	\	'console',
+	\	'log',
 	\	'await',
+	\	'window',
 	\	'break',
 	\	'case',
 	\	'catch',
@@ -41,6 +46,11 @@ let s:blacklist = {
 	\	'true',
 	\	'try',
 	\	'typeof',
+	\	'require',
+	\	'from',
+	\	'props',
+	\	'state',
+	\	'bind',
 	\	'var',
 	\	'void',
 	\	'while',
