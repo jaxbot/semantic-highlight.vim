@@ -141,7 +141,7 @@ function! s:buildColors()
 	else
 		let type = 'fg'
 	endif
-	if has('gui_running') || (exists('&guicolors') && &guicolors)
+	if $NVIM_TUI_ENABLE_TRUE_COLOR || has('gui_running') || (exists('&guicolors') && &guicolors)
 		let colorType = 'gui'
 		" Update color list in case the user made any changes
 		let s:semanticColors = g:semanticGUIColors
