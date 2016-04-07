@@ -134,7 +134,7 @@ function! s:semHighlight()
 				endif
 				let matchSubstituted = matchSubstituted . '\>'
 
-				escape 'syn match _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' ' . '/' . matchSubstituted . '/'
+				execute 'syn match _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' ' . '/' . matchSubstituted . '/'
 				let cur_color = (cur_color + 1) % colorLen
 			endif
 
