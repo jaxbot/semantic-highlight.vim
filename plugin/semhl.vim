@@ -103,7 +103,7 @@ function! s:semHighlight()
 	let b:cache_defined = {}
 
 	let buflen = line('$')
-	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
+	let pattern = '\<*[$a-zA-Z\_][$a-zA-Z0-9\_]*\>'
 	let cur_color = 0
 	let colorLen = len(s:semanticColors)
 
@@ -125,7 +125,16 @@ function! s:semHighlight()
 					let l:containedin = ' containedin=' . s:containedinlist[&filetype]
 				endif
 
-				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' ' . match
+				" Mangle the variable regex in order to ensure a $ is coloured
+				let containsDollar = matchstr(match, '\$')
+				if empty(containsDollar)
+					let matchSubstituted = '\<' . match
+				else
+					let matchSubstituted = substitute(match, '\$', '\$\\<', '')
+				endif
+				let matchSubstituted = matchSubstituted . '\>'
+
+				escape 'syn match _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' ' . '/' . matchSubstituted . '/'
 				let cur_color = (cur_color + 1) % colorLen
 			endif
 
