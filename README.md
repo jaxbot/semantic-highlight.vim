@@ -69,6 +69,23 @@ let g:semanticBlacklistOverride = {
 
 If you want to add language support to the plugin itself, feel free to edit autoload/blacklist.vim and submit a pull request with your changes. Help is appreciated!
 
+## Adding characters to be included in highlights
+
+Some languages, such as PHP and JavaScript, allow special characters to be used in variable names.
+
+Consider the following:
+
+```JS
+var $someObject = '1231';
+var someObject = 1231;
+```
+
+Without the `autocommand` outlined below, only thed `someObject` portion of the variable would be semantically highlighted, and highlighted the same colour as the `$`-free variable. To have the preceding `$` included in the semantic highlight, use the following snippet in your vimrc:
+
+```
+autocmd FileType javascript setlocal iskeyword+=$
+```
+
 ## Kudos
 
 Big thanks to John Leimon, whose [Semantic C/C++ Vimscript](http://www.vim.org/scripts/script.php?script_id=4945) was inspirational in the construction of this one.
