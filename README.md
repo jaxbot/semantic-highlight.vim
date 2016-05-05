@@ -49,11 +49,16 @@ This plugin is language agnostic, meaning it will work on any language with word
 
 Current language support with keyword blacklists:
 
+* C
+* C++
+* CoffeeScript
+* Java
 * JavaScript
-* Ruby
 * PHP
 * Python
-* CoffeeScript
+* Ruby
+* Rust
+* TypeScript
 
 This can be customized locally by populating `g:semanticBlacklistOverride` like so:
 
