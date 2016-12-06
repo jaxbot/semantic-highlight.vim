@@ -124,8 +124,7 @@ function! s:semHighlight()
 				if (!empty(s:containedinlist) && has_key(s:containedinlist, &filetype))
 					let l:containedin = ' containedin=' . s:containedinlist[&filetype]
 				endif
-
-				execute 'syn keyword _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' ' . match
+				execute 'syn match _semantic' . s:getCachedColor(cur_color, match) . l:containedin . ' "\<[\$]*' . match . '\>"'
 				let cur_color = (cur_color + 1) % colorLen
 			endif
 
