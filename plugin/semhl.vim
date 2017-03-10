@@ -14,11 +14,7 @@ if (exists('g:semanticEnableFileTypes'))
 endif
 
 function! BuildColorSubset(start, offset, end)
-  echo a:start 
-  echo a:offset
-  echo a:end
   let subSet = range(a:start + a:offset, a:start + a:end)
-  echo subSet
   return subSet
 endfunction
 
@@ -34,7 +30,7 @@ function! BuildTermColors()
     let termColors = termColors + colorSubset
     let start_at = start_at + offset + subset_size 
   endwhile
-  return termColors + colorSubset
+  return termColors 
 endfunction
 
 " Set defaults for colors
