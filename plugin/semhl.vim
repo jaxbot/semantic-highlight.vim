@@ -103,7 +103,7 @@ function! s:semHighlight()
 	let b:cache_defined = {}
 
 	let buflen = line('$')
-	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
+	let pattern = '\<[\$@]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
 	let colorLen = len(s:semanticColors)
 	let cur_color = str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % colorLen    " found on https://stackoverflow.com/questions/12737977/native-vim-random-number-script
 
