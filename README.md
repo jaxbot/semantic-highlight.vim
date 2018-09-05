@@ -43,6 +43,8 @@ let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,1
 
 Either list can also be set in your vimrc
 
+#### N.B. This forked version of SemanticHighlight computes a measure of darkness by using the HSP model and then rotate all the default colors to make them comfortable on light backgrounds if `darkness < 0.5`. I plan to come back later to dinamically change colors based on this measure (no more thresholds). 
+
 ## Language support
 
 This plugin is language agnostic, meaning it will work on any language with words. However, some languages have been tweaked by default to disable highlighting of language keywords.
@@ -100,4 +102,8 @@ Also big thanks to everyone who submitted bugs, suggestions, and pull requests!
 ## About me
 
 This plugin has been forked from jaxbot's [SemanticHighlight](https://github.com/jaxbot/semantic-highlight.vim) to add the support to light backgrounds and to the [Oni](https://github.com/onivim/oni) editor.
+
+This version has:
+* automatic change colors to be comfortable with light backgrounds
+* compatible with Oni edito - in future this should be compatible with any Nvim gui
 
