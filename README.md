@@ -105,5 +105,5 @@ This plugin has been forked from jaxbot's [SemanticHighlight](https://github.com
 
 This version has:
 * automatic change colors to be comfortable with light backgrounds
-* compatible with Oni edito - in future this should be compatible with any Nvim gui
+* compatible with Oni editor - in future this should be compatible with any Nvim gui
 
