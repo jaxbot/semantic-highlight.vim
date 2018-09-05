@@ -99,5 +99,5 @@ Also big thanks to everyone who submitted bugs, suggestions, and pull requests!
 
 ## About me
 
-I'm Jonathan. I like to hack around with Vim, Node.js, embedded hardware, and Glass. If any of that sounds interesting, [follow me!](https://github.com/jaxbot)
+This plugin has been forked from jaxbot's [SemanticHighlight](https://github.com/jaxbot/semantic-highlight.vim) to add the support to light backgrounds and to the [Oni](https://github.com/onivim/oni) editor.
 
