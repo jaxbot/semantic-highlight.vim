@@ -124,8 +124,8 @@ function! s:semHighlight()
 
 	let buflen = line('$')
 	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
-	let cur_color = 0
 	let colorLen = len(s:semanticColors)
+        let cur_color = str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % colorLen
 
 	while buflen
 		let curline = getline(buflen)
