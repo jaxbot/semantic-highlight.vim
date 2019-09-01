@@ -52,6 +52,7 @@ Current language support with keyword blacklists:
 * C
 * C++
 * CoffeeScript
+* Go
 * Java
 * JavaScript
 * PHP
