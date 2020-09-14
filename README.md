@@ -59,7 +59,6 @@ Current language support with keyword blacklists:
 * Python
 * Ruby
 * Rust
-* Scala
 * TypeScript
 
 This can be customized locally by populating `g:semanticBlacklistOverride` like so:
@@ -87,7 +86,7 @@ var $someObject = '1231';
 var someObject = 1231;
 ```
 
-Without the `autocommand` outlined below, only the `someObject` portion of the variable would be semantically highlighted, and highlighted the same colour as the `$`-free variable. To have the preceding `$` included in the semantic highlight, use the following snippet in your vimrc:
+Without the `autocommand` outlined below, only thed `someObject` portion of the variable would be semantically highlighted, and highlighted the same colour as the `$`-free variable. To have the preceding `$` included in the semantic highlight, use the following snippet in your vimrc:
 
 ```
 autocmd FileType javascript setlocal iskeyword+=$
