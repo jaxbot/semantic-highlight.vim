@@ -61,6 +61,7 @@ Current language support with keyword blacklists:
 * Rust
 * Scala
 * TypeScript
+* TypeScriptReact
 
 This can be customized locally by populating `g:semanticBlacklistOverride` like so:
 
