@@ -110,7 +110,7 @@ let s:blacklist = {
 	\	'any',
 	\	'module',
 	\ ],
-    \ 'typescriptreact': [
+	\ 'typescriptreact': [
 	\	'Array',
 	\	'Boolean',
 	\	'Object',
@@ -164,7 +164,7 @@ let s:blacklist = {
 	\	'void',
 	\	'while',
 	\	'with',
-    \   'JSON'
+	\	'JSON'
 	\ ],
 	\ 'ruby': [
 	\	'BEGIN',
