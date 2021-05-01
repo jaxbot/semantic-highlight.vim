@@ -118,7 +118,12 @@ function! s:semHighlight()
 			endif
 
 			let l:no_blacklist_exists_for_filetype = empty(s:blacklist) || !has_key(s:blacklist, &filetype)
-			if ((l:no_blacklist_exists_for_filetype || index(s:blacklist[&filetype], match) == -1) && !has_key(b:cache_defined, match))
+		        if !l:no_blacklist_exists_for_filetype
+			    let l:blacklist_matches = map(s:blacklist[&filetype], {key, val -> len(matchstr(match, val, 0))})
+		        else
+			    let l:blacklist_matches = [0]
+            		endif
+			if ((l:no_blacklist_exists_for_filetype || max(l:blacklist_matches) == 0) && !has_key(b:cache_defined, match))
 				let b:cache_defined[match] = 1
 				let l:containedin = ''
 				if (!empty(s:containedinlist) && has_key(s:containedinlist, &filetype))
