@@ -123,15 +123,15 @@ function! s:semHighlight()
 	let b:cache_defined = {}
 
 	let buflen = line('$')
-	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
+	let pattern = '\<[\$@]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
 	let colorLen = len(s:semanticColors)
-        let cur_color = str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % colorLen
+	let cur_color = str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % colorLen    " found on https://stackoverflow.com/questions/12737977/native-vim-random-number-script
 
 	while buflen
 		let curline = getline(buflen)
 		let index = 0
 		while 1
-			let match = matchstr(curline, pattern, index)
+      let [match, start_at, stop_at] = matchstrpos(curline, pattern, index)
 
 			if (empty(match))
 				break
@@ -149,7 +149,7 @@ function! s:semHighlight()
 				let cur_color = ((cur_color + 1) % colorLen) + 1
 			endif
 
-			let index += len(match) + 1
+      let index = stop_at
 		endwhile
 		let buflen -= 1
 	endwhile
