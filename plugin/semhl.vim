@@ -111,7 +111,7 @@ function! s:semHighlight()
 		let curline = getline(buflen)
 		let index = 0
 		while 1
-			let match = matchstr(curline, pattern, index)
+			let [match, start_at, stop_at] = matchstrpos(curline, pattern, index)
 
 			if (empty(match))
 				break
@@ -129,7 +129,7 @@ function! s:semHighlight()
 				let cur_color = (cur_color + 1) % colorLen
 			endif
 
-			let index += len(match) + 1
+			let index = stop_at
 		endwhile
 		let buflen -= 1
 	endwhile
