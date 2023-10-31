@@ -21,7 +21,7 @@ g:semanticTermColors                            *g:semanticTermColors*
 Override this with an array of numeric values to change the list of colors the
 plugin will use when in CLI mode.
 
-let g:semanticGUIColors = [1, 2]
+let g:semanticTermColors = [1, 2]
 
 g:semanticUseCache                              *g:semanticUseCache*
 
